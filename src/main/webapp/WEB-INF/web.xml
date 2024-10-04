@@ -5,7 +5,11 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!-- Servlet du Framework -->
+    <context-param>
+        <param-name>package</param-name>
+        <param-value>com.test</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>UrlListener</servlet-name>
         <servlet-class>mg.itu.framework.servlet.UrlListener</servlet-class>
