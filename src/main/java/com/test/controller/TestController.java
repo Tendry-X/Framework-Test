@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SPRINT 3bis : Paramètres dynamiques {id}
+ * SPRINT 6 : Arguments des méthodes
  */
 @MyAnnotation(value = "", method = HttpMethod.GET)
 public class TestController {
@@ -23,13 +23,15 @@ public class TestController {
     
     @MyAnnotation(value = "/hello", method = HttpMethod.GET)
     public String hello() {
-        return "<h1>Hello from Sprint 3bis!</h1>";
+        return "<h1>Hello from Sprint 6!</h1>";
     }
     
-    @MyAnnotation(value = "/etudiant/{id}", method = HttpMethod.GET)
-    public ModelView showEtudiant() {
+    @MyAnnotation(value = "/etudiant", method = HttpMethod.GET)
+    public ModelView showEtudiant(int id) {
         ModelView mv = new ModelView("etudiant");
-        mv.addItem("etudiant", etudiants.get(0));
+        if (id >= 0 && id < etudiants.size()) {
+            mv.addItem("etudiant", etudiants.get(id));
+        }
         return mv;
     }
 }
