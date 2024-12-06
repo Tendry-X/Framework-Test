@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SPRINT 6ter : Injection avec priorité
+ * SPRINT 7 : GET/POST distincts
  */
 @MyAnnotation(value = "", method = HttpMethod.GET)
 public class TestController {
@@ -24,15 +24,20 @@ public class TestController {
     
     @MyAnnotation(value = "/hello", method = HttpMethod.GET)
     public String hello() {
-        return "<h1>Hello from Sprint 6ter!</h1>";
+        return "<h1>Hello from Sprint 7!</h1>";
     }
     
-    @MyAnnotation(value = "/etudiant/{id}", method = HttpMethod.GET)
-    public ModelView showEtudiant(int id) {
-        ModelView mv = new ModelView("etudiant");
-        if (id >= 0 && id < etudiants.size()) {
-            mv.addItem("etudiant", etudiants.get(id));
-        }
+    @MyAnnotation(value = "/form", method = HttpMethod.GET)
+    public ModelView showForm() {
+        ModelView mv = new ModelView("form");
+        return mv;
+    }
+    
+    @MyAnnotation(value = "/form", method = HttpMethod.POST)
+    public ModelView submitForm(@MyParam("nom") String nom, @MyParam("prenom") String prenom) {
+        ModelView mv = new ModelView("result");
+        Etudiant etudiant = new Etudiant(nom, prenom);
+        mv.addItem("etudiant", etudiant);
         return mv;
     }
 }
