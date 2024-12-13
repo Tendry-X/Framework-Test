@@ -7,9 +7,10 @@ import mg.itu.framework.model.ModelView;
 import com.test.model.Etudiant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
- * SPRINT 7 : GET/POST distincts
+ * SPRINT 8 : Formulaires complexes
  */
 @MyAnnotation(value = "", method = HttpMethod.GET)
 public class TestController {
@@ -24,7 +25,7 @@ public class TestController {
     
     @MyAnnotation(value = "/hello", method = HttpMethod.GET)
     public String hello() {
-        return "<h1>Hello from Sprint 7!</h1>";
+        return "<h1>Hello from Sprint 8!</h1><p>Framework MVC complet!</p>";
     }
     
     @MyAnnotation(value = "/form", method = HttpMethod.GET)
@@ -34,10 +35,22 @@ public class TestController {
     }
     
     @MyAnnotation(value = "/form", method = HttpMethod.POST)
-    public ModelView submitForm(@MyParam("nom") String nom, @MyParam("prenom") String prenom) {
+    public ModelView submitForm(Map<String, Object> params) {
         ModelView mv = new ModelView("result");
+        String nom = (String) params.get("nom");
+        String prenom = (String) params.get("prenom");
         Etudiant etudiant = new Etudiant(nom, prenom);
         mv.addItem("etudiant", etudiant);
+        mv.addItem("allParams", params);
+        return mv;
+    }
+    
+    @MyAnnotation(value = "/etudiant/{id}", method = HttpMethod.GET)
+    public ModelView showEtudiant(int id) {
+        ModelView mv = new ModelView("etudiant");
+        if (id >= 0 && id < etudiants.size()) {
+            mv.addItem("etudiant", etudiants.get(id));
+        }
         return mv;
     }
 }
