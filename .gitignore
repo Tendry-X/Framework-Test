@@ -1,0 +1,25 @@
+# Fichiers compilés
+*.class
+*.war
+*.jar
+build/
+target/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Fichiers temporaires
+sources.txt
+*.tmp
